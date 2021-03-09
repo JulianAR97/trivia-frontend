@@ -53,13 +53,13 @@ let checkAnswer = function(e) {
   if (this.correctAnswer) {
     this.style.color = 'green'
     // add 1 second delay before tallying 
-    setTimeout(addScore, 1000)
+    addScore()
   } else {
     this.style.color = 'red'
     setTimeout(resetScore, 1000)
   }
-  setTimeout(removeAllChildren(questionField), 500)
-  getQuestion()
+  setTimeout(removeAllChildren, 2000, questionField)
+  setTimeout(getQuestion, 2000)
 }
 
 let addScore = function() {
