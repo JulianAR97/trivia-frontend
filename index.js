@@ -10,7 +10,9 @@ const questionCategories = ['animals', 'art', 'books', 'celebrities', 'entertain
 const questionField = document.getElementById('question')
 const timerField = document.getElementById('timer')
 
+// Initialize timer here to prevent bug where timer gets multiplied
 let timer = setInterval(function() {
+  // Inner text will start with empty string, and become empty string again during answer check
   if(timerField.innerText) {
     timerField.innerText = parseFloat(timerField.innerText) - 1
   }
