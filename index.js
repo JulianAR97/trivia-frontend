@@ -1,24 +1,3 @@
-// Add array prototype method random for use thoughout application
-Array.prototype.random = function() {
-  return this[Math.floor((Math.random()*this.length))]
-}
-// Define category and difficulty parameters for use with cocktail-trivia-api
-const difficulties = ['easy', 'medium', 'hard']
-const questionCategories = ['animals', 'art', 'books', 'celebrities', 'entertainment-board-games', 'entertainment-comics', 
-  'entertainment-film', 'entertainment-music', 'entertainment-musicals-theatres', 'entertainment-tv', 'entertainment-video-games', 
-  'general-knowledge', 'geography', 'history', 'mythology', 'politics', 'science-computers', 'science-gadgets', 'sports', 'vehicles']
-const questionField = document.getElementById('question')
-const timerField = document.getElementById('timer')
-
-// Initialize timer here to prevent bug where timer gets multiplied
-let timer = setInterval(function() {
-  // Inner text will start with empty string, and become empty string again during answer check
-  if(timerField.innerText) {
-    timerField.innerText = parseFloat(timerField.innerText) - 1
-  }
-}, 1000)
-
-
 
 let getQuestion = function() {
   // Get a random category and difficulty from previously defined constants
@@ -72,7 +51,7 @@ let checkAnswer = function(e) {
   setTimeout(function () {
     removeAllChildren(questionField) 
     getQuestion()
-   }, 2000)
+   }, 1000)
 }
 
 let addScore = function() {
