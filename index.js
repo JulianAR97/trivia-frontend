@@ -8,7 +8,13 @@ const questionCategories = ['animals', 'art', 'books', 'celebrities', 'entertain
   'entertainment-film', 'entertainment-music', 'entertainment-musicals-theatres', 'entertainment-tv', 'entertainment-video-games', 
   'general-knowledge', 'geography', 'history', 'mythology', 'politics', 'science-computers', 'science-gadgets', 'sports', 'vehicles']
 const questionField = document.getElementById('question')
+const timerField = document.getElementById('timer')
 
+let timer = setInterval(function() {
+  if(timerField.innerText) {
+    timerField.innerText = parseFloat(timerField.innerText) - 1
+  }
+}, 1000)
 
 
 
@@ -31,6 +37,8 @@ let displayQuestion = function(question) {
   p.innerText = question.text
   questionField.appendChild(p)
   question.answers.forEach((a) => appendAnswer(a, correctAnswer))
+  timerField.innerText = 30
+
 }
 
 let appendAnswer = function(answer, correctAnswer) {
@@ -58,8 +66,11 @@ let checkAnswer = function(e) {
     this.style.color = 'red'
     setTimeout(resetScore, 1000)
   }
-  setTimeout(removeAllChildren, 2000, questionField)
-  setTimeout(getQuestion, 2000)
+  timerField.innerText = ''
+  setTimeout(function () {
+    removeAllChildren(questionField) 
+    getQuestion()
+   }, 2000)
 }
 
 let addScore = function() {
