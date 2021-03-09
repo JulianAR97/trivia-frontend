@@ -9,6 +9,9 @@ const questionCategories = ['animals', 'art', 'books', 'celebrities', 'entertain
   'general-knowledge', 'geography', 'history', 'mythology', 'politics', 'science-computers', 'science-gadgets', 'sports', 'vehicles']
 const main = document.getElementById('main')
 
+
+
+
 let getQuestion = function() {
   // Get a random category and difficulty from previously defined constants
   let category = questionCategories.random()
@@ -47,6 +50,27 @@ let appendAnswer = function(answer, correctAnswer) {
 
 let checkAnswer = function(e) {
   // this is p div
-  this.correctAnswer ? this.style.color = 'green' : this.style.color = 'red'
+  if (this.correctAnswer) {
+    this.style.color = 'green'
+    // add 1 second delay before tallying 
+    setTimeout(addScore, 1000)
+  } else {
+    this.style.color = 'red'
+    setTimeout(resetScore, 1000)
+  }
 }
 
+let addScore = function() {
+  let scoreField = document.querySelector("#score > p")
+  // inner text is "Score: 0", so we need to split and convert to integer
+  let score = parseFloat(scoreField.innerText.split(': ')[1], 10) + 10
+  scoreField.innerText = 'Score: ' + score
+}
+
+let resetScore = function() {
+  let scoreField = document.querySelector("#score > p")
+  scoreField.innerText = 'Score: 0'
+}
+
+
+// add a loading sign until content loaded
