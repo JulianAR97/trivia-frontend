@@ -30,5 +30,15 @@ let displayQuestion = function(question) {
   question.answers.forEach(a => appendAnswer(a))
 }
 
-
+let appendAnswer = function(answer) {
+  let p = document.createElement('p')
+  p.innerText = answer.text
+  // conditional styling for testing
+  if (answer.correct) {
+    p.style.color = 'green'
+  } else {
+    p.style.color = 'red'
+  }
+  main.appendChild(p);
+}
 
