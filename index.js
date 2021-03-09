@@ -27,18 +27,26 @@ let displayQuestion = function(question) {
   let p = document.createElement('p')
   p.innerText = question.text
   main.appendChild(p)
-  question.answers.forEach(a => appendAnswer(a))
+  question.answers.forEach((a) => appendAnswer(a, correctAnswer))
 }
 
-let appendAnswer = function(answer) {
+let appendAnswer = function(answer, correctAnswer) {
+  console.log(correctAnswer)
   let p = document.createElement('p')
   p.innerText = answer.text
-  // conditional styling for testing
-  if (answer.correct) {
-    p.style.color = 'green'
-  } else {
-    p.style.color = 'red'
-  }
   main.appendChild(p);
+
+  // Add value to p variable to check if answer is correct or not
+  if (correctAnswer.text === answer.text) {
+    p.correctAnswer = true;
+  } else {
+    p.correctAnswer = false;
+  }
+  p.addEventListener('click', checkAnswer)
+}
+
+let checkAnswer = function(e) {
+  // this is p div
+  this.correctAnswer ? this.style.color = 'green' : this.style.color = 'red'
 }
 
