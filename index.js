@@ -7,7 +7,7 @@ const difficulties = ['easy', 'medium', 'hard']
 const questionCategories = ['animals', 'art', 'books', 'celebrities', 'entertainment-board-games', 'entertainment-comics', 
   'entertainment-film', 'entertainment-music', 'entertainment-musicals-theatres', 'entertainment-tv', 'entertainment-video-games', 
   'general-knowledge', 'geography', 'history', 'mythology', 'politics', 'science-computers', 'science-gadgets', 'sports', 'vehicles']
-const main = document.getElementById('main')
+const questionField = document.getElementById('question')
 
 
 
@@ -29,7 +29,7 @@ let displayQuestion = function(question) {
   // add question to main div
   let p = document.createElement('p')
   p.innerText = question.text
-  main.appendChild(p)
+  questionField.appendChild(p)
   question.answers.forEach((a) => appendAnswer(a, correctAnswer))
 }
 
@@ -37,7 +37,7 @@ let appendAnswer = function(answer, correctAnswer) {
   console.log(correctAnswer)
   let p = document.createElement('p')
   p.innerText = answer.text
-  main.appendChild(p);
+  questionField.appendChild(p);
 
   // Add value to p variable to check if answer is correct or not
   if (correctAnswer.text === answer.text) {
@@ -58,6 +58,8 @@ let checkAnswer = function(e) {
     this.style.color = 'red'
     setTimeout(resetScore, 1000)
   }
+  setTimeout(removeAllChildren(questionField), 500)
+  getQuestion()
 }
 
 let addScore = function() {
@@ -70,6 +72,13 @@ let addScore = function() {
 let resetScore = function() {
   let scoreField = document.querySelector("#score > p")
   scoreField.innerText = 'Score: 0'
+}
+
+// Using this function to clear question field
+let removeAllChildren = function(parentNode) {
+  while (parentNode.firstChild) {
+    parentNode.removeChild(parentNode.firstChild)
+  }
 }
 
 
