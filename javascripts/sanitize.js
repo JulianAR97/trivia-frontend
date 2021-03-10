@@ -1,7 +1,9 @@
 // allows us to convert keys to symbols
 const conversion = {
   '&#039;': "'",
-  '&quot;': '"'
+  '&quot;': '"',
+  'aacute': 'á',
+  '&ograve': 'ò'
 }
 
 let sanitize = function(string) {
