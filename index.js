@@ -36,21 +36,21 @@ let displayQuestion = function(question) {
 
 let appendAnswer = function(answer, correctAnswer, i) {
   // add each answer to div
-  let p = document.createElement('p')
+  let b = document.createElement('button')
   // dynamically set classes for answer fields e.g. answer a1, answer a2
-  p.className = 'answer'
-  p.id = `a${1}`
-  p.innerText = answer.text
-  answerField.appendChild(p);
+  b.className = 'answer'
+  b.id = `a${i}`
+  b.innerText = answer.text
+  answerField.appendChild(b);
 
   // Add value to p variable to check if answer is correct or not
   if (correctAnswer.text === answer.text) {
-    p.correctAnswer = true;
+    b.correctAnswer = true;
   } else {
-    p.correctAnswer = false;
+    b.correctAnswer = false;
   }
 
-  p.addEventListener('click', checkAnswer)
+  b.addEventListener('click', checkAnswer)
 }
 
 let checkAnswer = function(e) {
@@ -65,7 +65,8 @@ let checkAnswer = function(e) {
   }
   timerField.innerText = ''
   setTimeout(function () {
-    removeAllChildren(questionField) 
+    removeAllChildren(questionField)
+    removeAllChildren(answerField) 
     getQuestion()
    }, 1000)
 }
