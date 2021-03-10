@@ -2,10 +2,14 @@
 let getQuestion = function() {
   // Get a random category and difficulty from previously defined constants
   let category = questionCategories.random()
+  console.log(category)
   let difficulty = difficulties.random()
   let url = `http://cocktail-trivia-api.herokuapp.com/api/category/${category}/difficulty/${difficulty}/count/1`
   // We only need the first element of json because we are only handling one question at at time
-  fetch(url).then(resp => resp.json()).then(json => displayQuestion(json[0]))
+  fetch(url).then(resp => resp.json()).then(function(json) {
+    console.log(json)
+    displayQuestion(json[0])
+  })
 }
 
 let displayQuestion = function(question) {
@@ -20,21 +24,23 @@ let displayQuestion = function(question) {
   p.innerText = question.text
   questionField.appendChild(p)
   
-  // add each answer to div
-  question.answers.forEach(function(a){
+  // add each answer to div, giving them each a class corresponding with their index
+  question.answers.forEach(function(a, i){
     a.text = sanitize(a.text)
-    appendAnswer(a, correctAnswer)
+    appendAnswer(a, correctAnswer, i + 1)
   })
 
   // reset timer to 30
   timerField.innerText = 30
 }
 
-let appendAnswer = function(answer, correctAnswer) {
+let appendAnswer = function(answer, correctAnswer, i) {
   // add each answer to div
   let p = document.createElement('p')
+  // dynamically set classes for answer fields e.g. answer a1, answer a2
+  p.className = `answer a${i}`
   p.innerText = answer.text
-  questionField.appendChild(p);
+  answerField.appendChild(p);
 
   // Add value to p variable to check if answer is correct or not
   if (correctAnswer.text === answer.text) {
