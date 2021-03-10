@@ -11,19 +11,27 @@ let getQuestion = function() {
 let displayQuestion = function(question) {
   // question object is in form {text: 'This value is actually the question', answers: 'array of answers'}
   // answers array is in form [{correct: false, text: 'Answer Text'}, {correct: true, text: 'Answer Text'}, ..., ...]
+  // sanitize allows us to convert symbols like &#039; that we receive from api into human readable font
+  question.text = sanitize(question.text)
   let correctAnswer = question.answers.find(answer => answer.correct)
   
-  // add question to main div
+  // add question to div
   let p = document.createElement('p')
   p.innerText = question.text
   questionField.appendChild(p)
-  question.answers.forEach((a) => appendAnswer(a, correctAnswer))
-  timerField.innerText = 30
+  
+  // add each answer to div
+  question.answers.forEach(function(a){
+    a.text = sanitize(a.text)
+    appendAnswer(a, correctAnswer)
+  })
 
+  // reset timer to 30
+  timerField.innerText = 30
 }
 
 let appendAnswer = function(answer, correctAnswer) {
-  console.log(correctAnswer)
+  // add each answer to div
   let p = document.createElement('p')
   p.innerText = answer.text
   questionField.appendChild(p);
@@ -34,6 +42,7 @@ let appendAnswer = function(answer, correctAnswer) {
   } else {
     p.correctAnswer = false;
   }
+
   p.addEventListener('click', checkAnswer)
 }
 
