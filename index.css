@@ -11,21 +11,29 @@ body {
   border-radius: 8px;
 }
 
-
-#main * {
-  margin-left: 10px;
+#game-helpers {
+  text-align: center;
 }
 
-#game-helpers > p > span {
-  margin-left: 0px;
-}
+
+
+
 
 /* p element's width is the size of it's text */
 #game-helpers > p {
   display: inline-block;
+  margin: 10px 10px 0px auto;
+  font-weight: bold;
 }
 
 
-#question {
-  float: none;
+#question-and-answers {
+  margin-left: 10px;
+  text-align: center
 }
+
+.answer {
+  width: 40%;
+  margin: 10px 10px 0px auto;
+}
+
