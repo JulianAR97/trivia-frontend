@@ -64,15 +64,15 @@ let checkAnswer = function(e) {
 }
 
 let addScore = function() {
-  let scoreField = document.querySelector("#score > p")
-  // inner text is "Score: 0", so we need to split and convert to integer
-  let score = parseFloat(scoreField.innerText.split(': ')[1], 10) + 10
-  scoreField.innerText = 'Score: ' + score
+  let scoreField = document.getElementById('score');
+  // inner text is must be converted to integer to increment
+  let score = parseFloat(scoreField.innerText);
+  scoreField.innerText = score + 10;
 }
 
 let resetScore = function() {
-  let scoreField = document.querySelector("#score > p")
-  scoreField.innerText = 'Score: 0'
+  let scoreField = document.getElementById('score');
+  scoreField.innerText = 0
 }
 
 // Using this function to clear question field
