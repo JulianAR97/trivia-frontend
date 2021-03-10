@@ -38,7 +38,8 @@ let appendAnswer = function(answer, correctAnswer, i) {
   // add each answer to div
   let p = document.createElement('p')
   // dynamically set classes for answer fields e.g. answer a1, answer a2
-  p.className = `answer a${i}`
+  p.className = 'answer'
+  p.id = `a${1}`
   p.innerText = answer.text
   answerField.appendChild(p);
 
