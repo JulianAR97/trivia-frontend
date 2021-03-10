@@ -4,7 +4,8 @@ const conversion = {
   '&quot;': '"',
   'aacute': 'á',
   '&ograve': 'ò',
-  '&eacute': 'é'
+  '&eacute': 'é',
+  '&Uuml;':'Ü'
 }
 
 let sanitize = function(string) {
