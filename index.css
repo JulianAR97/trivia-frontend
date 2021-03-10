@@ -7,20 +7,21 @@
   border-radius: 8px;
 }
 
-#score > p {
-  display: inline-block;
-  margin-left: 10px;
-}
-
-#timer-field > p {
-  display: inline-block;
-  margin-left: 10px;
-}
 
 #main * {
   margin-left: 10px;
 }
 
-#timer {
+#game-helpers > p > span {
   margin-left: 0px;
+}
+
+/* p element's width is the size of it's text */
+#game-helpers > p {
+  display: inline-block;
+}
+
+
+#question {
+  float: none;
 }
