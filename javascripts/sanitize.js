@@ -3,7 +3,8 @@ const conversion = {
   '&#039;': "'",
   '&quot;': '"',
   'aacute': 'á',
-  '&ograve': 'ò'
+  '&ograve': 'ò',
+  '&eacute': 'é'
 }
 
 let sanitize = function(string) {
