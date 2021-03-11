@@ -1,4 +1,4 @@
-const timerField = document.getElementById('timer')
+
 
 // Initialize timer here to prevent bug where timer gets multiplied
 let timer = setInterval(function() {
