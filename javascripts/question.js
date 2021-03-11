@@ -21,7 +21,6 @@ class Question {
       this.answers = q.answers
       // Each element of answers array will have an object with a key of 'correct', and a boolean val
       this.correctAnswer = this.answers.find(answer => answer.correct);
-      console.log(1)
       this.displayQuestion()
     }.bind(this))
   }
@@ -72,7 +71,6 @@ class Question {
     }
     timerField.innerText = '';
     setTimeout(function() {
-      console.log(questionField)
       removeAllChildren(questionField)
       removeAllChildren(answerField)
       new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()}).getQuestion()
