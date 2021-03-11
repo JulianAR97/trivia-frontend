@@ -58,10 +58,10 @@ class Question {
   checkAnswer() {
     if (this.correctAnswer) {
       this.className = 'answer btn btn-success'
-      Question.addScore()
+      Score.addScore()
     } else {
       this.className = 'answer btn btn-danger'
-      setTimeout(Question.resetScore, 1000)
+      setTimeout(Score.resetScore, 1000)
     }
     timerField.innerText = '';
     setTimeout(function() {
@@ -71,19 +71,6 @@ class Question {
       new Question({'category': 'animals', 'difficulty': 'medium'}).getQuestion()
     }, 1000)
   }
-
-  static addScore() {
-    // change that to global
-    let scoreField = document.getElementById('score');
-    let score = parseFloat(scoreField.innerText);
-    scoreField.innerText = score + 10;
-  }
-
-  static resetScore() {
-    let scoreField = document.getElementById('score');
-    scoreField.innerText = 0;
-  }
-
 
 }
 
