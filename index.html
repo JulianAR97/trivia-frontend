@@ -8,20 +8,29 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <title>Document</title>
 </head>
-<body onload="getQuestion()">
+<body onload="tryClass()">
   
-  <div id="main">
-    <div id="game-helpers">
-      
-   
-        <p>Score: <span id="score">0</span></p>
-        <p>Timer: <span id="timer"></span></p>
+  <div class="row">
+    <div class="col-sm-3">
 
     </div>
-    
-    <div id="question-and-answers">
-      <div id="question"></div>
-      <div id="answers"></div>
+    <div id="main" class="col-sm-6">
+      <div id="game-helpers">
+        
+        
+        <p>Score: <span id="score">0</span></p>
+        <p>Timer: <span id="timer"></span></p>
+        
+      </div>
+      
+      <div id="question-and-answers">
+        <div id="question"></div>
+        <div id="answers"></div>
+      </div>
+      
+    </div>
+    <div class="col-sm-3">
+
     </div>
   </div>
   
@@ -34,6 +43,7 @@
   <!-- Main Scripts -->
   <script src="javascripts/globals.js"></script>
   <script src="javascripts/timer.js"></script>
+  <script src="question.js"></script>
   <script src="index.js"></script>
   <script src="javascripts/sanitize.js"></script>
 </body>
