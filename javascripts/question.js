@@ -7,6 +7,7 @@ class Question {
     this.questionContent = null;
     this.answers = null;
     this.correctAnswer = null;
+    this.correctAnswerField = null;
   }
 
   getQuestion() {
@@ -36,9 +37,12 @@ class Question {
       a.text = sanitize(a.text)
       this.appendAnswer(a, i + 1)
     }.bind(this))
+
+    timerField.innerText = 30
   }
 
   appendAnswer(answer, index) {
+    // 'this' is instance of question class
     let b = document.createElement('button')
     b.className = 'answer btn btn-default'
     b.id = `a${index}`
@@ -48,27 +52,30 @@ class Question {
 
     if (answer.text === this.correctAnswer.text) {
       b.correctAnswer = true;
+      this.correctAnswerField = b
     } else {
       b.correctAnswer = false; 
     }
 
-    b.addEventListener('click', this.checkAnswer)
+    b.addEventListener('click', this.checkAnswer.bind(this))
   }
 
-  checkAnswer() {
-    if (this.correctAnswer) {
-      this.className = 'answer btn btn-success'
+  checkAnswer(e) {
+    if (e.target.correctAnswer) {
+      e.target.className = 'answer btn btn-success'
       Score.addScore()
     } else {
-      this.className = 'answer btn btn-danger'
-      setTimeout(Score.resetScore, 1000)
+      // set background to red, and highlight correct answer
+      e.target.className = 'answer btn btn-danger'
+      this.correctAnswerField.className = 'answer btn btn-success'
+      setTimeout(Score.resetScore, 2000)
     }
     timerField.innerText = '';
     setTimeout(function() {
       console.log(questionField)
       removeAllChildren(questionField)
       removeAllChildren(answerField)
-      new Question({'category': 'animals', 'difficulty': 'medium'}).getQuestion()
+      new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()}).getQuestion()
     }, 1000)
   }
 
