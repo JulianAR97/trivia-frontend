@@ -14,3 +14,4 @@ const questionCategories = [
 const qAndAField = document.getElementById('question-and-answers')
 const questionField = document.getElementById('question')
 const answerField = document.getElementById('answers')
+const scoreField = document.getElementById('score')
