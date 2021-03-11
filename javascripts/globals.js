@@ -11,10 +11,14 @@ const questionCategories = [
   'politics', 'science-computers', 'science-gadgets', 'sports', 'vehicles'
 ]
 
+const body = document.getElementsByTagName('body')[0]
+const main = document.getElementById('main')
+const gameHelpers = document.getElementById('game-helpers')
 const qAndAField = document.getElementById('question-and-answers')
 const questionField = document.getElementById('question')
 const answerField = document.getElementById('answers')
-const scoreField = document.getElementById('score')
+let scoreField;
+let timerField;
 
 // cool js stuff
 difficulties.random() = difficulties[Math.floor(Math.random() * difficulties.length)]
