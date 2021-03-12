@@ -13,7 +13,10 @@ function removeAllChildren(parentNode) {
 
 let start = function() {
   let b = document.createElement('button');
-  b.className = 'btn btn-primary centered';
+  b.className = 'btn btn-primary';
+  b.style.backgroundColor = 'transparent';
+  b.style.color = '#843b62';
+  b.style.borderColor = '#843b62';
   b.id = 'start';
   b.innerText = "Start";
   main.appendChild(b)
