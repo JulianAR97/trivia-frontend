@@ -58,3 +58,15 @@ let appendScoreAndTimer = function() {
   timerField = document.getElementById('timer');
 
 }
+
+let gameOver = function() {
+  removeAllChildren(qAndAField)
+  removeAllChildren(gameHelpers)
+  appendNewScoreInput()
+}
+
+let appendNewScoreInput = function() {
+  let newScoreInput = document.createElement('input')
+  newScoreInput.maxLength = 3;
+  main.appendChild(newScoreInput)
+}
