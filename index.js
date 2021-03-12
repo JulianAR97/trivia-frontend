@@ -17,17 +17,22 @@ let start = function() {
 
 let addStartButton = function() {
   let b = document.createElement('button');
-  b.className = 'btn btn-primary';
-  b.style.backgroundColor = 'transparent';
-  b.style.color = '#843b62';
-  b.style.borderColor = '#843b62';
-  b.style.borderRightWidth = '3px';
-  b.style.borderBottomWidth = '3px';
-
+  addButtonStyle(b);
   b.id = 'start';
   b.innerText = "Start";
   main.appendChild(b)
   b.addEventListener('click', loadContent)
+}
+
+// Add button style in js because can't override bootstrap in css file
+let addButtonStyle = function(button) {
+  button.className = 'btn btn-primary';
+  button.style.backgroundColor = 'transparent';
+  button.style.color = '#843b62';
+  button.style.borderColor = '#843b62';
+  button.style.borderRightWidth = '3px';
+  button.style.borderBottomWidth = '3px';
+  return button
 }
 
 let loadContent = function() {
@@ -42,8 +47,8 @@ let appendScoreAndTimer = function() {
   let pTimer = document.createElement('p')
 
 
-  pScore.innerHTML = 'Score: <span id="score">0</span>'
-  pTimer.innerHTML = 'Timer: <span id="timer"></span>'
+  pScore.innerHTML = '<h4>Score: <span id="score">0</span></h4>'
+  pTimer.innerHTML = '<h4>Timer: <span id="timer"></span></h4>'
   
   gameHelpers.appendChild(pScore);
   gameHelpers.appendChild(pTimer);
