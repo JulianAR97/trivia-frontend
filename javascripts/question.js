@@ -43,7 +43,9 @@ class Question {
   appendAnswer(answer, index) {
     // 'this' is instance of question class
     let b = document.createElement('button')
-    b.className = 'answer btn btn-default'
+    addButtonStyle(b)
+    // add answer class to format buttons into 2 x 2 grid
+    b.classList.add('answer')
     b.id = `a${index}`
     b.innerText = answer.text
     // answerField is defined in globals
