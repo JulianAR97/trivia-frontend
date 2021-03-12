@@ -63,16 +63,26 @@ let appendScoreAndTimer = function() {
 let gameOver = function() {
   removeAllChildren(qAndAField)
   removeAllChildren(gameHelpers)
-  appendNewScoreInput()
+  appendNewScoreForm()
   getTopTenScores()
 }
 
-let appendNewScoreInput = function() {
-  let newScoreInput = document.createElement('input')
-  newScoreInput.backgroundColor = 'transparent';
-  newScoreInput.borderColor = maroon;
-  newScoreInput.maxLength = 3;
-  main.appendChild(newScoreInput)
+let appendNewScoreForm = function() {
+  let newScoreForm = document.createElement('form');
+  let nameInput = document.createElement('input');
+  let submit = document.createElement('input');
+  submit.type = 'submit';
+  submit.value = 'Submit';
+  nameInput.type = 'text';
+
+  nameInput.backgroundColor = 'transparent';
+  nameInput.borderColor = maroon;
+  nameInput.maxLength = 3;
+
+  newScoreForm.appendChild(nameInput);
+  newScoreForm.appendChild(submit);
+
+  main.appendChild(newScoreForm);
 }
 
 let getTopTenScores = function() {
