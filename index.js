@@ -28,8 +28,9 @@ let addStartButton = function() {
 let addButtonStyle = function(button) {
   button.className = 'btn btn-primary';
   button.style.backgroundColor = 'transparent';
-  button.style.color = '#843b62';
-  button.style.borderColor = '#843b62';
+  // maroon color 
+  button.style.color = maroon;
+  button.style.borderColor = maroon;
   button.style.borderRightWidth = '3px';
   button.style.borderBottomWidth = '3px';
   return button
@@ -63,10 +64,59 @@ let gameOver = function() {
   removeAllChildren(qAndAField)
   removeAllChildren(gameHelpers)
   appendNewScoreInput()
+  getTopTenScores()
 }
 
 let appendNewScoreInput = function() {
   let newScoreInput = document.createElement('input')
+  newScoreInput.backgroundColor = 'transparent';
+  newScoreInput.borderColor = maroon;
   newScoreInput.maxLength = 3;
   main.appendChild(newScoreInput)
+}
+
+let getTopTenScores = function() {
+  // get scores via fetch and then append them
+  fetch('http://localhost:3000/scores').then(resp => resp.json()).then(json => appendTopTenScores(json))
+}
+
+let appendTopTenScores = function(scores) {
+  let tBody = createScoreTable()
+  
+  scores.forEach(function(s) {
+    let tr = document.createElement('tr');
+    let tdName = document.createElement('td');
+    let tdScore = document.createElement('td');
+
+    tdName.innerText = s.name;
+    tdScore.innerText = s.count;
+
+    tr.appendChild(tdName);
+    tr.appendChild(tdScore);
+
+    tBody.appendChild(tr)
+  })
+}
+
+let createScoreTable = function() {
+  let scoreTable = document.createElement('table');
+  let tHead = document.createElement('thead');
+  let tBody = document.createElement('tbody');
+  
+  let headRow = document.createElement('tr')
+  let nameHead = document.createElement('th');
+  let scoreHead = document.createElement('th')
+  
+  nameHead.innerText = 'Name';
+  scoreHead.innerText = 'Score';
+
+  headRow.appendChild(nameHead);
+  headRow.appendChild(scoreHead);
+  tHead.appendChild(headRow);
+  scoreTable.appendChild(tHead);
+  scoreTable.appendChild(tBody);
+  main.appendChild(scoreTable);
+
+  // return tBody so we can add data to table in append scores function
+  return tBody;
 }
