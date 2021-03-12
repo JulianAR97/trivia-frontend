@@ -12,17 +12,23 @@ function removeAllChildren(parentNode) {
 // add a loading sign until content loaded
 
 let start = function() {
+  addStartButton()
+}
+
+let addStartButton = function() {
   let b = document.createElement('button');
   b.className = 'btn btn-primary';
   b.style.backgroundColor = 'transparent';
   b.style.color = '#843b62';
   b.style.borderColor = '#843b62';
+  b.style.borderRightWidth = '3px';
+  b.style.borderBottomWidth = '3px';
+
   b.id = 'start';
   b.innerText = "Start";
   main.appendChild(b)
   b.addEventListener('click', loadContent)
 }
-
 
 let loadContent = function() {
   let b = document.getElementById('start');
