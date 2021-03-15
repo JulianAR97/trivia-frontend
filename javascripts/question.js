@@ -65,20 +65,19 @@ class Question {
     if (e.target.correctAnswer) {
       e.target.className = 'answer btn btn-success'
       Score.addScore()
+      timerField.innerText = '';
+      setTimeout(function() {
+        removeAllChildren(questionField)
+        removeAllChildren(answerField)
+        new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()}).getQuestion()
+      }, 1000)
     } else {
       // set background to red, and highlight correct answer
       e.target.className = 'answer btn btn-danger'
       this.correctAnswerField.className = 'answer btn btn-success'
-      setTimeout(Score.resetScore, 2000)
+      setTimeout(gameOver, 2000)
     }
-    timerField.innerText = '';
-    setTimeout(function() {
-      removeAllChildren(questionField)
-      removeAllChildren(answerField)
-      new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()}).getQuestion()
-    }, 1000)
   }
-
 }
 
 // Does correct answer get sanitized
