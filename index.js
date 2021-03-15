@@ -70,17 +70,16 @@ let gameOver = function() {
 let appendNewScoreForm = function() {
   let newScoreForm = document.createElement('form');
   let nameInput = document.createElement('input');
-  let submit = document.createElement('input');
-  submit.type = 'submit';
-  submit.value = 'Submit';
   nameInput.type = 'text';
+  nameInput.placeholder = 'Enter Name'
+  
 
   nameInput.backgroundColor = 'transparent';
   nameInput.borderColor = maroon;
   nameInput.maxLength = 3;
 
   newScoreForm.appendChild(nameInput);
-  newScoreForm.appendChild(submit);
+  newScoreForm.addEventListener('submit', (e) => sendScore(e, 10))
 
   main.appendChild(newScoreForm);
 }
@@ -130,3 +129,27 @@ let createScoreTable = function() {
   // return tBody so we can add data to table in append scores function
   return tBody;
 }
+
+let sendScore = function(e, score) {
+  // Form isn't actually submitted, page doesn't refresh
+  e.preventDefault()
+  // e.target is form, first child is input, value is what is user input
+  let name = e.target.firstElementChild.value
+  postData(name, score)
+}
+
+let postData = function(name, score) {
+  
+  const postScoreDataConfig = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify( {name: name, count: score} )
+  }
+
+  fetch("http://localhost:3000/scores", postScoreDataConfig)
+}
+
+// Fix timer so that it doesn't hit game over twice
