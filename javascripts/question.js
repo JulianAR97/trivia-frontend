@@ -39,7 +39,6 @@ class Question {
 
     timeLeft = 30;
     timerPaused = false;
-    setInterval(timerCountdown, 1000)
   }
 
   appendAnswer(answer, index) {
@@ -69,7 +68,7 @@ class Question {
     if (e.target.correctAnswer) {
       //First remove style added by addButtonStyle() in index.js
       e.target.style = {}
-      // Then set className based on bootstrap defaults
+      // Then set className based on bootstrap
       e.target.className = 'answer btn btn-success'
       Score.addScore()
       setTimeout(function() {

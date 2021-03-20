@@ -62,8 +62,9 @@ let appendScoreAndTimer = function() {
 
 let gameOver = function() {
   let finalScore = scoreField.innerText
-  removeAllChildren(qAndAField)
+  removeAllChildren(questionField)
   removeAllChildren(gameHelpers)
+  removeAllChildren(answerField)
   appendNewScoreInput(finalScore)
   getTopTenScores()
 }
@@ -71,6 +72,7 @@ let gameOver = function() {
 let appendNewScoreInput = function(score) {
   let nameInput = document.createElement('input');
   nameInput.type = 'text';
+  nameInput.id = 'name-input'
   nameInput.placeholder = 'Enter Name'
   nameInput.backgroundColor = 'transparent';
   nameInput.borderColor = maroon;
@@ -110,6 +112,7 @@ let appendTopTenScores = function(scores) {
 
 let createScoreTable = function() {
   let scoreTable = document.createElement('table');
+  scoreTable.id = 'score-table';
   let tHead = document.createElement('thead');
   let tBody = document.createElement('tbody');
   
@@ -131,13 +134,26 @@ let createScoreTable = function() {
   return tBody;
 }
 
+
+let removeTable = function() {
+  let table = document.getElementById('score-table')
+  let nameInput = document.getElementById('name-input')
+  main.removeChild(table);
+  main.removeChild(nameInput);
+}
+
 let sendScore = function(e, score) {
-  debugger;
   // Form isn't actually submitted, page doesn't refresh
   e.preventDefault()
   // e.target is form, first child is input, value is what is user input
   let name = e.target.value
   postData(name, score)
+
+  // After sending score to back end, remove table, and start over
+  alert('Score successfully submitted!')
+  removeTable()
+  start()
+
 }
 
 let postData = function(name, score) {
@@ -154,4 +170,6 @@ let postData = function(name, score) {
   fetch("http://localhost:3000/scores", postScoreDataConfig)
 }
 
-// Fix timer so that it doesn't hit game over twice
+
+
+// add input in correct slot

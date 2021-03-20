@@ -16,3 +16,5 @@ let timerCountdown = function() {
     }
   }
 }
+
+let timer = setInterval(timerCountdown, 1000)
