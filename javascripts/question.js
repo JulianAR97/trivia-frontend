@@ -67,18 +67,23 @@ class Question {
     timerPaused = true;
 
     if (e.target.correctAnswer) {
+      //First remove style added by addButtonStyle() in index.js
+      e.target.style = {}
+      // Then set className based on bootstrap defaults
       e.target.className = 'answer btn btn-success'
       Score.addScore()
       setTimeout(function() {
         removeAllChildren(questionField)
         removeAllChildren(answerField)
         new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()}).getQuestion()
-      }, 1000)
+      }, 3000)
     } else {
-      // set background to red, and highlight correct answer
-      e.target.className = 'answer btn btn-danger'
+      // First remove style added by addButtonStyle() in index.js
+      e.target.style = {};;
+      e.target.className = 'answer btn btn-danger';
+      this.correctAnswerField.style = {}
       this.correctAnswerField.className = 'answer btn btn-success'
-      setTimeout(gameOver, 2000)
+      setTimeout(gameOver, 3000)
     }
   }
 }
