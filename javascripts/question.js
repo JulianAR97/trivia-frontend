@@ -37,7 +37,9 @@ class Question {
       this.appendAnswer(a, i + 1)
     }.bind(this))
 
-    timerField.innerText = 30
+    timeLeft = 30;
+    timerPaused = false;
+    setInterval(timerCountdown, 1000)
   }
 
   appendAnswer(answer, index) {
@@ -62,10 +64,11 @@ class Question {
   }
 
   checkAnswer(e) {
+    timerPaused = true;
+
     if (e.target.correctAnswer) {
       e.target.className = 'answer btn btn-success'
       Score.addScore()
-      timerField.innerText = '';
       setTimeout(function() {
         removeAllChildren(questionField)
         removeAllChildren(answerField)
