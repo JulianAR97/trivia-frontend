@@ -61,27 +61,28 @@ let appendScoreAndTimer = function() {
 }
 
 let gameOver = function() {
+  let finalScore = scoreField.innerText
   removeAllChildren(qAndAField)
   removeAllChildren(gameHelpers)
-  appendNewScoreForm()
+  appendNewScoreInput(finalScore)
   getTopTenScores()
 }
 
-let appendNewScoreForm = function() {
-  let newScoreForm = document.createElement('form');
+let appendNewScoreInput = function(score) {
   let nameInput = document.createElement('input');
   nameInput.type = 'text';
   nameInput.placeholder = 'Enter Name'
-  
-
   nameInput.backgroundColor = 'transparent';
   nameInput.borderColor = maroon;
   nameInput.maxLength = 3;
 
-  newScoreForm.appendChild(nameInput);
-  newScoreForm.addEventListener('submit', (e) => sendScore(e, 10))
-
-  main.appendChild(newScoreForm);
+  nameInput.addEventListener('keypress', function(e, score) {
+    if (e.key === 'Enter') {
+      console.log('here')
+      sendScore(e, score)
+    }
+  })
+  main.appendChild(nameInput);
 }
 
 let getTopTenScores = function() {
@@ -131,10 +132,11 @@ let createScoreTable = function() {
 }
 
 let sendScore = function(e, score) {
+  debugger;
   // Form isn't actually submitted, page doesn't refresh
   e.preventDefault()
   // e.target is form, first child is input, value is what is user input
-  let name = e.target.firstElementChild.value
+  let name = e.target.value
   postData(name, score)
 }
 
