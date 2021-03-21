@@ -42,11 +42,12 @@ class Score {
     nameInput.style.border = '0';
     nameInput.maxLength = 3;
     nameInput.size = 3;
-  
-    nameInput.addEventListener('keypress', function(e, score) {
+    nameInput.finalScore = score;
+    
+    nameInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
         console.log('here')
-        Score.sendScore(e, score)
+        Score.sendScore(e)
         resetGame();
       }
     })
@@ -92,17 +93,18 @@ class Score {
   }
 
   // Event handler for <enter> on name input field
-  static sendScore = function(e, score) {
+  static sendScore = function(e) {
     // Form isn't actually submitted, page doesn't refresh
     e.preventDefault()
     // e.target is form, first child is input, value is what is user input
     let name = e.target.value
+    let score = e.target.finalScore
+    debugger;
     Score.postData(name, score)
 
   }
   
   static postData = function(name, score) {
-    
     const postScoreDataConfig = {
       method: "POST",
       headers: {
