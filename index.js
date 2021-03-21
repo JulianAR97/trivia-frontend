@@ -65,8 +65,7 @@ let gameOver = function() {
   removeAllChildren(questionField)
   removeAllChildren(gameHelpers)
   removeAllChildren(answerField)
-  Score.getTopTenScores()
-  Score.appendNewScoreInput(finalScore)
+  Score.getTopTenScores(finalScore)
 }
 
 
