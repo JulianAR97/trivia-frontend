@@ -71,9 +71,7 @@ let gameOver = function() {
 
 let removeTable = function() {
   let table = document.getElementById('score-table')
-  let nameInput = document.getElementById('name-input')
   main.removeChild(table);
-  main.removeChild(nameInput);
 }
 
 let resetGame = function() {
