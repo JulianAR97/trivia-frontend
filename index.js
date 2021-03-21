@@ -65,73 +65,8 @@ let gameOver = function() {
   removeAllChildren(questionField)
   removeAllChildren(gameHelpers)
   removeAllChildren(answerField)
-  appendNewScoreInput(finalScore)
-  getTopTenScores()
-}
-
-let appendNewScoreInput = function(score) {
-  let nameInput = document.createElement('input');
-  nameInput.type = 'text';
-  nameInput.id = 'name-input'
-  nameInput.placeholder = 'Enter Name'
-  nameInput.backgroundColor = 'transparent';
-  nameInput.borderColor = maroon;
-  nameInput.maxLength = 3;
-
-  nameInput.addEventListener('keypress', function(e, score) {
-    if (e.key === 'Enter') {
-      console.log('here')
-      sendScore(e, score)
-    }
-  })
-  main.appendChild(nameInput);
-}
-
-let getTopTenScores = function() {
-  // get scores via fetch and then append them
-  fetch('http://localhost:3000/scores').then(resp => resp.json()).then(json => appendTopTenScores(json))
-}
-
-let appendTopTenScores = function(scores) {
-  let tBody = createScoreTable()
-  
-  scores.forEach(function(s) {
-    let tr = document.createElement('tr');
-    let tdName = document.createElement('td');
-    let tdScore = document.createElement('td');
-
-    tdName.innerText = s.name;
-    tdScore.innerText = s.count;
-
-    tr.appendChild(tdName);
-    tr.appendChild(tdScore);
-
-    tBody.appendChild(tr)
-  })
-}
-
-let createScoreTable = function() {
-  let scoreTable = document.createElement('table');
-  scoreTable.id = 'score-table';
-  let tHead = document.createElement('thead');
-  let tBody = document.createElement('tbody');
-  
-  let headRow = document.createElement('tr')
-  let nameHead = document.createElement('th');
-  let scoreHead = document.createElement('th')
-  
-  nameHead.innerText = 'Name';
-  scoreHead.innerText = 'Score';
-
-  headRow.appendChild(nameHead);
-  headRow.appendChild(scoreHead);
-  tHead.appendChild(headRow);
-  scoreTable.appendChild(tHead);
-  scoreTable.appendChild(tBody);
-  main.appendChild(scoreTable);
-
-  // return tBody so we can add data to table in append scores function
-  return tBody;
+  Score.getTopTenScores()
+  Score.appendNewScoreInput(finalScore)
 }
 
 
@@ -142,34 +77,17 @@ let removeTable = function() {
   main.removeChild(nameInput);
 }
 
-let sendScore = function(e, score) {
-  // Form isn't actually submitted, page doesn't refresh
-  e.preventDefault()
-  // e.target is form, first child is input, value is what is user input
-  let name = e.target.value
-  postData(name, score)
-
+let resetGame = function() {
   // After sending score to back end, remove table, and start over
   alert('Score successfully submitted!')
   removeTable()
   start()
-
-}
-
-let postData = function(name, score) {
-  
-  const postScoreDataConfig = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify( {name: name, count: score} )
-  }
-
-  fetch("http://localhost:3000/scores", postScoreDataConfig)
 }
 
 
 
 // add input in correct slot
+
+// adding name input to table
+// add score to array with blank name 
+// sort names with scores.sort((a, b) => (a.count > b.count) ? -1 : 1)
