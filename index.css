@@ -60,7 +60,7 @@ body {
 /* remove default shadow when input is selected */
 input:focus {
   outline: none !important;
-  box-shadow: 0 0 10px #6e9256;
+  box-shadow: 0 0 10px #843b62;
 }
 
 
