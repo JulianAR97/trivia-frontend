@@ -11,8 +11,8 @@ const questionCategories = [
   'politics', 'science-computers', 'science-gadgets', 'sports', 'vehicles'
 ]
 
-const maroon = '#843b62';
-const salmon = '#ffb997';
+const customMaroon = '#843b62';
+const customSalmon = '#ffb997';
 const body = document.getElementsByTagName('body')[0]
 const main = document.getElementById('main')
 const gameHelpers = document.getElementById('game-helpers')
