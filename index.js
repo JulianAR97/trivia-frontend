@@ -1,9 +1,3 @@
-
-let randomizeQuestion = function() {
-  let q = new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()})
-  q.getQuestion()
-}
-
 function removeAllChildren(parentNode) {
   while (parentNode.firstChild) {
     parentNode.removeChild(parentNode.firstChild)
@@ -12,35 +6,59 @@ function removeAllChildren(parentNode) {
 // add a loading sign until content loaded
 
 let start = function() {
-  addStartButton()
+  listCategories();
 }
 
-let addStartButton = function() {
-  let b = document.createElement('button');
-  addButtonStyle(b);
-  b.id = 'start';
-  b.innerText = "Start";
-  main.appendChild(b)
-  b.addEventListener('click', loadContent)
+let listCategories = function() {
+  for (let key in questionCategories) {
+    let p = document.createElement('p');
+    p.className = 'question-category'
+    p.id = questionCategories[key]
+    p.innerText = key;
+    p.addEventListener('click', loadContent)
+    main.appendChild(p)
+    main.appendChild(document.createElement('br'))
+  }
 }
 
-// Add button style in js because can't override bootstrap in css file
-let addButtonStyle = function(button) {
-  button.className = 'btn btn-primary';
-  button.style.backgroundColor = 'transparent';
-  // maroon color 
-  button.style.color = customMaroon;
-  button.style.borderColor = customMaroon;
-  button.style.borderRightWidth = '3px';
-  button.style.borderBottomWidth = '3px';
-  return button
+let getQuestions = function(category) {
+  // Get endpoint from questionCategories Object in globals and append it to apiURL in globals
+  let endpoint = questionCategories[category]
+  fetch(apiURL + endpoint)
+    .then(resp => resp.json())
+    .then(json => {
+      setQuestions(json)
+      q = new Question;
+      q.getQuestion()
+    })
 }
 
-let loadContent = function() {
-  let b = document.getElementById('start');
-  main.removeChild(b)
-  appendScoreAndTimer()
-  randomizeQuestion()
+let setQuestions = function(json) {
+  questionList = json
+  console.log(questionList)
+}
+
+let removeCategoriesFromMain = function(categories, leftDiv) {
+  // If the questions are in the main div, move them to left div
+  if (!!document.querySelectorAll("#main > p.question-category")[0]) {
+    categories.forEach(category => {
+      main.removeChild(category);
+      leftDiv.appendChild(category);
+      leftDiv.appendChild(document.createElement('br'))
+    })
+    appendScoreAndTimer()
+  }
+}
+
+let loadContent = function(e) {
+  let categories = document.querySelectorAll('p.question-category');
+  let leftDiv = document.querySelector("body > div.row > div:nth-child(1)");
+  leftDiv.align = 'center'
+  removeCategoriesFromMain(categories, leftDiv)
+
+  // Save to variable defined in globals for later use;
+  selectedCategory = e.target.innerText;
+  getQuestions(selectedCategory)
 }
 
 let appendScoreAndTimer = function() {
