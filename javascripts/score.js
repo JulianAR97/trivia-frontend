@@ -18,7 +18,7 @@ class Score {
     nameInput.style.backgroundColor = 'transparent';
     nameInput.style.border = '0';
     nameInput.maxLength = 3;
-    nameInput.size = 3;
+    nameInput.size = 2;
     return nameInput;
     
   }
@@ -65,7 +65,6 @@ class Score {
     // e.target is form, first child is input, value is what is user input
     let name = e.target.value
     let score = e.target.finalScore
-    debugger;
     Score.postData(name, score)
 
   }
