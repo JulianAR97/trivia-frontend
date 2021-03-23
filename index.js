@@ -1,5 +1,5 @@
 
-let tryClass = function() {
+let randomizeQuestion = function() {
   let q = new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()})
   q.getQuestion()
 }
@@ -40,7 +40,7 @@ let loadContent = function() {
   let b = document.getElementById('start');
   main.removeChild(b)
   appendScoreAndTimer()
-  tryClass()
+  randomizeQuestion()
 }
 
 let appendScoreAndTimer = function() {
@@ -68,23 +68,26 @@ let gameOver = function() {
   Score.fetchTopTenScores(finalScore)
 }
 
-
-let removeTable = function() {
-  let table = document.getElementById('score-table')
-  main.removeChild(table);
+let startGameHTML = function() {
+  // First, remove left and right divs created during endgame
+  [document.getElementById('left-div'), document.getElementById('right-div')].forEach(div => {
+    main.removeChild(div)
+  })
+  
+  // Then reset div classnames for divs not used during endgame
+  document.querySelectorAll('div.no-class').forEach(div => {
+    div.className = 'col-sm-3'
+  });
+  
+  // Change main className back
+  main.className = 'col-sm-6'
 }
+
 
 let resetGame = function() {
   // After sending score to back end, remove table, and start over
   alert('Score successfully submitted!')
-  removeTable()
+  startGameHTML()
   start()
 }
 
-
-
-// add input in correct slot
-
-// adding name input to table
-// add score to array with blank name 
-// sort names with scores.sort((a, b) => (a.count > b.count) ? -1 : 1)
