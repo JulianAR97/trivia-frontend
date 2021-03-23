@@ -1,14 +1,3 @@
-// start with data in array of objects [{name: 'x', count: x}]
-
-// First create html div with width of container
-// Nest two contatiners, one with width of 3 and the other with width of 9
-// First container has class col-xs-3 col-lg-4
-// Second has class col-xs-9 col-lg-8
-// Both should have align="center"
-// right div should have align="center"
-// Must change the classname for div following main and div before main to ''
-// Change main div to col-xs-12
-// Use H4 for charts
 let gameOverHTML = function() {
   document.querySelectorAll('div.col-sm-3').forEach(e => e.className = 'no-class')
   main.className = 'col-xs-12'
@@ -16,6 +5,8 @@ let gameOverHTML = function() {
   let rightDiv = document.createElement('div')
   leftDiv.className = 'col-xs-3 col-lg-4'
   rightDiv.className = 'col-xs-9 col-lg-8'
+  leftDiv.id = 'left-div';
+  rightDiv.id = 'right-div'
   leftDiv.align = 'right';
   rightDiv.align = 'left';
   return [leftDiv, rightDiv]
