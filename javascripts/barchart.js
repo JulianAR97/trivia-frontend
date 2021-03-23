@@ -37,6 +37,8 @@ let listName = function(score, div) {
 } 
 
 let listScore = function(score, div) {
+  // TODO: create scale to protect against scores that are over 70, 
+  // we don't want scores over 70% width of container
   let h = document.createElement('h4')
   h.innerText = score;
   h.className = 'score-header';
@@ -55,47 +57,8 @@ let createBarChart = function(scores) {
   scores.forEach(s => {
     listName(s, leftDiv)
     listScore(s.count, rightDiv)
-    // let nameHeader = document.createElement('h4');
-    // nameHeader.style.color = customMaroon;
-    // nameHeader.innerText = s.name;
-    // leftDiv.appendChild(nameHeader);
-
-    // let scoreHeader = document.createElement('h4');
-    // scoreHeader.innerText = s.count;
-    // scoreHeader.className = 'score-header';
-    // scoreHeader.style.color = customSalmon;
-    // scoreHeader.style.backgroundColor = customMaroon;
-    // scoreHeader.style.width = s.count + '%'
-    // rightDiv.appendChild(scoreHeader);
   })
-  debugger;
+
   main.appendChild(leftDiv);
-  main.appendChild(rightDiv);
-  
-  
-  // let nameInput = Score.initializeNameInput()
-  // return ([nameInput, leftDiv, rightDiv])
-  
+  main.appendChild(rightDiv);  
 }
-
-
-
-// ['jul', 'kyl', 'tay', 'kay', 'cas', 'ali', 'mik', 'reg'].forEach(e => {
-//   debugger;
-//   let h = document.createElement('h4')
-//   h.style.color = customMaroon
-//   h.innerText = e 
-//   leftDiv.appendChild(h)
-// })
-// main.appendChild(leftDiv);
-
-// ['70%', '65%', '60%', '55%', '50%', '45%', '40%', '35%'].forEach(e => {
-//   let h = document.createElement('h4')
-//   h.innerText = e.slice(0, -1);
-//   h.className = 'score-header'
-//   h.style.color = customSalmon;
-//   h.style.backgroundColor = customMaroon
-//   h.style.width = e
-//   rightDiv.appendChild(h)
-// })
-// main.appendChild(rightDiv)
