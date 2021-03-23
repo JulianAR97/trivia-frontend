@@ -14,20 +14,7 @@ class Question {
     q.answers.forEach(ans => ans.text = sanitize(ans.text));
     this.answers = q.answers;
     this.correctAnswer = this.answers.find(answer => answer.correct);
-    debugger;
     this.displayQuestion()
-    // let url = `http://cocktail-trivia-api.herokuapp.com/api/category/${this.category}/difficulty/${this.difficulty}/count/1`
-    // json gives an object in the form 1 : {text: 'This value is actually the question', answers: 'array of answers'}
-    // fetch(url).then(resp => resp.json()).then(function(json) {
-    //   // sanitize is defined in sanitize.js, and corrects characters that were not rendered
-    //   // e.g. '&eacute' to 'é'
-    //   let q = json[0]
-    //   this.questionContent = sanitize(q.text)
-    //   this.answers = q.answers
-    //   // Each element of answers array will have an object with a key of 'correct', and a boolean val
-    //   this.correctAnswer = this.answers.find(answer => answer.correct);
-    //   this.displayQuestion()
-    // }.bind(this))
   }
 
   displayQuestion() {
@@ -79,7 +66,8 @@ class Question {
       setTimeout(function() {
         removeAllChildren(questionField)
         removeAllChildren(answerField)
-        new Question({'category': questionCategories.random(), 'difficulty': difficulties.random()}).getQuestion()
+        let q = new Question
+        q.getQuestion()
       }, 3000)
     } else {
       // First remove style added by addButtonStyle() in index.js
@@ -92,4 +80,4 @@ class Question {
   }
 }
 
-// Does correct answer get sanitized
+
