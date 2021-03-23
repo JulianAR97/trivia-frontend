@@ -33,6 +33,18 @@ let getQuestions = function(category) {
     })
 }
 
+// Add button style in js because can't override bootstrap in css file
+let addButtonStyle = function(button) {
+  button.className = 'btn btn-primary';
+  button.style.backgroundColor = 'transparent';
+  // maroon color 
+  button.style.color = customMaroon;
+  button.style.borderColor = customMaroon;
+  button.style.borderRightWidth = '3px';
+  button.style.borderBottomWidth = '3px';
+  return button
+}
+
 let setQuestions = function(json) {
   questionList = json
   console.log(questionList)
@@ -78,7 +90,14 @@ let appendScoreAndTimer = function() {
 
 }
 
+let removeCategories = function() {
+  let breaks = document.querySelectorAll('div#main > br')
+  breaks.forEach(br => main.removeChild(br));
+  let leftDiv = document.querySelector("body > div.row > div:nth-child(1)")
+  removeAllChildren(leftDiv)
+}
 let gameOver = function() {
+  removeCategories()
   let finalScore = scoreField.innerText
   removeAllChildren(questionField)
   removeAllChildren(gameHelpers)
