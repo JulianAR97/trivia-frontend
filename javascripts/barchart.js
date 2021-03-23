@@ -60,5 +60,9 @@ let createBarChart = function(scores) {
   })
 
   main.appendChild(leftDiv);
-  main.appendChild(rightDiv);  
+  main.appendChild(rightDiv);
+  document.getElementById('name-input').focus();  
 }
+
+
+// Autoselect input field;
