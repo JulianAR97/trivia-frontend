@@ -29,8 +29,8 @@ let addButtonStyle = function(button) {
   button.className = 'btn btn-primary';
   button.style.backgroundColor = 'transparent';
   // maroon color 
-  button.style.color = maroon;
-  button.style.borderColor = maroon;
+  button.style.color = customMaroon;
+  button.style.borderColor = customMaroon;
   button.style.borderRightWidth = '3px';
   button.style.borderBottomWidth = '3px';
   return button
@@ -65,7 +65,7 @@ let gameOver = function() {
   removeAllChildren(questionField)
   removeAllChildren(gameHelpers)
   removeAllChildren(answerField)
-  Score.getTopTenScores(finalScore)
+  Score.fetchTopTenScores(finalScore)
 }
 
 
