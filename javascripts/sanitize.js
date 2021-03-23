@@ -2,12 +2,18 @@
 const conversion = {
   '&#039;': "'",
   '&quot;': '"',
-  'aacute': 'á',
-  '&ograve': 'ò',
+  'aacute;': 'á',
+  '&ograve;': 'ò',
   '&eacute;': 'é',
   '&Uuml;':'Ü',
   '&prime;': '′',
-  '&amp;': '&'
+  '&amp;': '&',
+  '&ouml;': 'ö',
+  '&uuml;': 'ü',
+  '&aring;': 'å',
+  '&Aring;': 'Å',
+  '&ntilde;': 'ñ'
+
 }
 
 let sanitize = function(string) {
