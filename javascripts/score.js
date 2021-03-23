@@ -9,29 +9,7 @@ class Score {
     scoreField.innerText = 0;
   }
 
-
-  static createScoreTable = function() {
-    let scoreTable = document.createElement('table');
-    let tHead = document.createElement('thead');
-    let tBody = document.createElement('tbody');
-    let headRow = document.createElement('tr')
-    let nameHead = document.createElement('th');
-    let scoreHead = document.createElement('th')
-    
-    scoreTable.id = 'score-table';
-    nameHead.innerText = 'Name';
-    scoreHead.innerText = 'Score';
-    
-    [nameHead, scoreHead].forEach(ele => headRow.appendChild(ele))
-    tHead.appendChild(headRow);
-    
-    [tHead, tBody].forEach(ele => scoreTable.appendChild(ele))
-    main.appendChild(scoreTable);
-  
-    // return tBody so we can add data to table in append scores function
-    return tBody;
-  }
-
+  // initializeNameInput => createNameInput => Add event handler handleEnter
   static initializeNameInput = function() {
     let nameInput = document.createElement('input')
     nameInput.type = 'text';
@@ -60,47 +38,24 @@ class Score {
     }
   }
 
-  static getTopTenScores = function(finalScore) {
+  static fetchTopTenScores = function(finalScore) {
     // get scores via fetch and then append them
     fetch('http://localhost:3000/scores')
         .then(resp => resp.json())
         .then(json => {
-          Score.appendTopTenScores(json, finalScore)
-          document.getElementById('name-input').focus()
+          let scores = Score.addScoreToTopTen(json, finalScore)
+          createBarChart(scores)
         })
   }
 
-  static appendTopTenScores = function(scores, finalScore) {
+  static addScoreToTopTen = function(scores, finalScore) {
     // First add final score to array of score objects
     scores.push({name: '', count: Number(finalScore)})
 
     // then sort the new list of score objects 
     scores.sort((a, b) => (a.count > b.count) ? -1 : 1);
+    return scores;
 
-    let tBody = Score.createScoreTable()
-    let nameInput;
-    scores.forEach(s => {
-      Score.appendScoreToTable(s, nameInput, tBody)
-    })
-
-  }
-
-  static appendScoreToTable = function(score, nameInput, tableBody) {
-    let tr = document.createElement('tr');
-    // Array(2).fill('abc') = ['abc', 'abc']
-    let tdName = document.createElement('td');
-    let tdScore = document.createElement('td');
-    
-    if (!score.name) {
-      nameInput = Score.createNameInput(score.count)
-      tdName.appendChild(nameInput)
-    } else {
-      tdName.innerText = score.name;
-    }
-    // tdName.innerText = score.name;
-    tdScore.innerText = score.count;
-    [tdName, tdScore].forEach(td => tr.appendChild(td))
-    tableBody.appendChild(tr)
   }
 
   // Event handler for <enter> on name input field
