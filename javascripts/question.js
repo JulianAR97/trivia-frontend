@@ -10,6 +10,7 @@ class Question {
 
   getQuestion() {
     let q = questionList.pop();
+    // Convert strings to symbols through sanitize
     this.questionContent = sanitize(q.text);
     q.answers.forEach(ans => ans.text = sanitize(ans.text));
     this.answers = q.answers;
@@ -54,6 +55,7 @@ class Question {
     b.addEventListener('click', this.checkAnswer.bind(this))
   }
 
+
   checkAnswer(e) {
     timerPaused = true;
 
@@ -64,8 +66,7 @@ class Question {
       e.target.className = 'answer btn btn-success'
       Score.addScore()
       setTimeout(function() {
-        removeAllChildren(questionField)
-        removeAllChildren(answerField)
+        removeQuestionAndAnswers()
         let q = new Question
         q.getQuestion()
       }, 3000)
