@@ -4,6 +4,7 @@ let removeAllChildren = function(parentNode) {
   }
 }
 
+// Removes question content from div nested in main
 let removeQuestionAndAnswers = function() {
   removeAllChildren(questionField)
   removeAllChildren(answerField)
@@ -25,7 +26,6 @@ let addButtonStyle = function(button) {
 let appendScoreAndTimer = function() {
   let pScore = document.createElement('p')
   let pTimer = document.createElement('p')
-  
   
   pScore.innerHTML = '<h4>Score: <span id="score">0</span></h4>'
   pTimer.innerHTML = '<h4>Timer: <span id="timer"></span></h4>'
@@ -63,6 +63,8 @@ let startGameHTML = function() {
   [document.getElementById('left-div'), document.getElementById('right-div')].forEach(div => {
     main.removeChild(div)
   })
+
+  main.removeChild(document.getElementById(scoreboard))
   
   // Then reset div classnames for divs not used during endgame
   document.querySelectorAll('div.no-class').forEach(div => {
