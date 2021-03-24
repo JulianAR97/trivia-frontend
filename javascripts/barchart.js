@@ -1,6 +1,10 @@
 let gameOverHTML = function() {
   document.querySelectorAll('div.col-sm-3').forEach(e => e.className = 'no-class')
   main.className = 'col-xs-12'
+  let h = document.createElement('h2');
+  h.innerText = 'Scoreboard';
+  h.id = 'scoreboard'
+  main.appendChild(h)
   let leftDiv = document.createElement('div')
   let rightDiv = document.createElement('div')
   leftDiv.className = 'col-xs-3 col-lg-4'
