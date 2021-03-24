@@ -21,28 +21,22 @@ let addButtonStyle = function(button) {
   return button
 }
 
-let removeCategories = function() {
-  let breaks = document.querySelectorAll('div#main > br')
-  breaks.forEach(br => main.removeChild(br));
-  let leftDiv = document.querySelector("body > div.row > div:nth-child(1)")
-  removeAllChildren(leftDiv)
-}
 
 let appendScoreAndTimer = function() {
   let pScore = document.createElement('p')
   let pTimer = document.createElement('p')
-
-
+  
+  
   pScore.innerHTML = '<h4>Score: <span id="score">0</span></h4>'
   pTimer.innerHTML = '<h4>Timer: <span id="timer"></span></h4>'
   
   gameHelpers.appendChild(pScore);
   gameHelpers.appendChild(pTimer);
-
+  
   // previously defined in globals
   scoreField = document.getElementById('score');
   timerField = document.getElementById('timer');
-
+  
 }
 
 
@@ -50,12 +44,12 @@ let getQuestions = function(category) {
   // Get endpoint from questionCategories Object in globals and append it to apiURL in globals
   let endpoint = questionCategories[category]
   fetch(apiURL + endpoint)
-    .then(resp => resp.json())
-    .then(json => {
-      setQuestions(json)
-      q = new Question;
-      q.getQuestion()
-    })
+  .then(resp => resp.json())
+  .then(json => {
+    setQuestions(json)
+    q = new Question;
+    q.getQuestion()
+  })
 }
 
 let setQuestions = function(json) {
@@ -90,5 +84,21 @@ let removeCategoriesFromMain = function(categories, leftDiv) {
     appendScoreAndTimer() // helpers.js
   } else {
     removeQuestionAndAnswers() // helpers.js
+  }
+}
+
+
+let removeCategories = function() {
+  let breaks = document.querySelectorAll('div#main > br')
+  breaks.forEach(br => main.removeChild(br));
+  let leftDiv = document.querySelector("body > div.row > div:nth-child(1)")
+  removeAllChildren(leftDiv)
+}
+
+let categoryToSlug = function(category) {
+  if (category === 'T.V.') {
+    return 't-v'
+  } else {
+    return category.split(' ').join('-')
   }
 }
