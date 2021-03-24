@@ -11,7 +11,7 @@ let listCategories = function() {
     let p = document.createElement('p');
     p.className = 'question-category'
     p.id = questionCategories[key]
-    p.innerText = key;
+    p.innerHTML = `<b>${key}<b>`;
     p.addEventListener('click', loadContent)
     main.appendChild(p)
     main.appendChild(document.createElement('br'))
