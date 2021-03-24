@@ -60,11 +60,12 @@ let setQuestions = function(json) {
 
 let startGameHTML = function() {
   // First, remove left and right divs created during endgame
+
   [document.getElementById('left-div'), document.getElementById('right-div')].forEach(div => {
     main.removeChild(div)
   })
 
-  main.removeChild(document.getElementById(scoreboard))
+  main.removeChild(document.getElementById('scoreboard'))
   
   // Then reset div classnames for divs not used during endgame
   document.querySelectorAll('div.no-class').forEach(div => {
