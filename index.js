@@ -10,6 +10,7 @@ let start = function() {
 }
 
 let listCategories = function() {
+  // key is category itself
   for (let key in questionCategories) {
     let p = document.createElement('p');
     p.className = 'question-category'
@@ -57,8 +58,11 @@ let removeCategoriesFromMain = function(categories, leftDiv) {
       main.removeChild(category);
       leftDiv.appendChild(category);
       leftDiv.appendChild(document.createElement('br'))
-    })
+    }) 
     appendScoreAndTimer()
+  } else {
+    removeAllChildren(questionField)
+    removeAllChildren(answerField)
   }
 }
 
