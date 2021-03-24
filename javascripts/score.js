@@ -40,7 +40,7 @@ class Score {
 
   static fetchTopTenScores = function(finalScore) {
     // get scores via fetch and then append them
-    fetch('http://localhost:3000/scores')
+    fetch(`http://localhost:3000/${categoryToSlug(selectedCategory)}/scores`)
         .then(resp => resp.json())
         .then(json => {
           let scores = Score.addScoreToTopTen(json, finalScore)
@@ -70,13 +70,14 @@ class Score {
   }
   
   static postData = function(name, score) {
+    console.log('here')
     const postScoreDataConfig = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify( {name: name, count: score} )
+      body: JSON.stringify( {name: name, count: score, category: selectedCategory} )
     }
   
     fetch("http://localhost:3000/scores", postScoreDataConfig)
